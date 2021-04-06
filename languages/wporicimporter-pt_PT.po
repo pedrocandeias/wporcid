@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wordpress Orcid Importer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-13 17:14+0000\n"
+"PO-Revision-Date: 2020-05-13 17:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: Português\n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.3; wp-5.4.1"
+
+#: wp-orcid-importer.php:78
+msgid "Biography"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Display ORCID Profile content using a shortcode to insert in a page or post"
+msgstr ""
+"Apresenta as publicações de um perfil ORCID através de um shortcode inserido "
+"numa página ou num post."
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://www.pedrocandeias.net"
+msgstr "https://pedrocandeias.net"
+
+#. Author of the plugin
+msgid "Pedro Candeias"
+msgstr "Pedro Candeias"
+
+#: wp-orcid-importer.php:240
+msgid "Publication date:"
+msgstr "Data de publicação: "
+
+#: wp-orcid-importer.php:214
+msgid "Publications"
+msgstr "Publicações"
+
+#: wp-orcid-importer.php:241
+msgid "Type of publication:"
+msgstr "Tipo de publicações:"
+
+#. Name of the plugin
+msgid "Wordpress Orcid Importer"
+msgstr "Wordpress Orcid Importer"

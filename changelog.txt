@@ -1,0 +1,12 @@
+= v1.0.1 =
+
+Option to remove SCOPUS from showing as it duplicates the entries.
+
+= v1.0.0 =
+
+Date: 14.05.2020
+
+238. Commented the persons name in the publications;
+237-244. Changed html structure; 
+237-244. Added an if empty evaluation to vars;
+191. array_push outside foreach;
