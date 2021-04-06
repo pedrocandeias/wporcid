@@ -73,20 +73,23 @@ function wp_orcid_importer_code($atts)
 
             if ($sliceProfile == 1) {
 
-        // Biografia
+            // Biografia
                 if ($elementID == 'bio') {
                     echo '<h2>'.__('Biography', 'wporicimporter').'</h2>';
                     echo $jsonInput['biography']['content'];
                 }
             } else {
                 $pubIDs = [];
+                $displayIndexs = [];
                 $y = 0;
                 foreach ($jsonInput['group'] as $nivel1) {
                     foreach ($nivel1['work-summary'] as $nivel2) {
                         if ($y==$pubLimit) {
                             break;
                         }
+                        if($nivel2['display-index'] == '0'){}else{
                         array_push($pubIDs, $nivel2['put-code']);
+                        }
                         $y++;
                     }
                 }
@@ -103,12 +106,8 @@ function wp_orcid_importer_code($atts)
     }
 
 
-    function fetchPubArray(&$orcidID, &$pubIDs, &$pubLimit)
-    {
-        $array = array(
-    );
-
-
+    function fetchPubArray(&$orcidID, &$pubIDs, &$pubLimit) {
+        $array = array();
         $i = 0;
         $varNum = 1;
         foreach ($pubIDs as $pubID) {
@@ -123,6 +122,9 @@ function wp_orcid_importer_code($atts)
             array_push(${'array' . $varNum}, $pubID);
         }
 
+    
+
+
 
         $out = cURL('https://pub.orcid.org/v2.0/' . $orcidID . '/person');
         $jsonInputNome = json_decode($out, true);
@@ -136,6 +138,7 @@ function wp_orcid_importer_code($atts)
         }
 
 
+
         for ($i=1; $i <= $varNum ; $i++) {
             $str = implode(",", ${'array' . $i});
             $urlPubName = 'https://pub.orcid.org/v2.0/' . $orcidID . '/works/' . $str;
@@ -143,16 +146,20 @@ function wp_orcid_importer_code($atts)
 
             $jsonInput = json_decode($output, true);
 
+
             foreach ($jsonInput['bulk'] as $nivel1) {
                 ${'array' . $i} = array(
+                    'pubid' => '',
                     'id' => '',
                     'titulo' => '',
                     'journal' => '',
                     'data' => '',
                     'tipo' => '',
-                    'url' => ''
+                    'url' => '',
+                    'source-name' =>'',
                 );
 
+                ${'array' . $i}['pubid'] = $varNum;
                 ${'array' . $i}['id'] = $pessoa;
 
                 foreach ($nivel1['work']['title']['title'] as $tituloPub) {
@@ -213,6 +220,10 @@ function wp_orcid_importer_code($atts)
         }
 
         foreach ($arrayPublica as $nivel1) {
+           
+            if (isset($nivel1['pubid'])) {
+                $journalpubid = $nivel1['pubid'];
+            }
             if (isset($nivel1['titulo'])) {
                 $titulo = $nivel1['titulo'];
             } else {
@@ -234,11 +245,13 @@ function wp_orcid_importer_code($atts)
                 $url = $nivel1['url'];
             }
 
+
+
             echo '<div class="publication">';
             /* if($pessoa !== ''){echo '<p class="publication-author">' . $pessoa . '</p>';} */
             if($titulo !== ''){echo '<p class="publication-title"><strong>' . $titulo . '</strong></p>';}
             if($journal !== ''){echo '<p class="publication-journal">' . $journal . '</p>';}
-            if($data !== ''){echo '<p class="publication-date"><strong>'.__('Publication date:', 'wporicimporter').'</strong>' . $data . '</p>';}
+            if($data !== ''){echo '<p class="publication-date"><strong>'.__('Publication date:', 'wporicimporter').'</strong> ' . $data . '</p>';}
             if($tipo !== ''){echo '<p class="publication-type"><strong>'.__('Type of publication:', 'wporicimporter').'</strong> '. $tipo . '</p>';}
             if($url !== ''){echo '<p class="publication-url"><strong>URL: </strong><a href="' . $url . '">' . $url . '</a>';}
             echo '</div>';

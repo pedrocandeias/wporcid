@@ -13,3 +13,10 @@ License URI: http://www.gnu.org/licenses/gpl
 
 Wordpress ORCID importer plugin allows to import data from the ORCID API.
 It works using Shortcodes and the Author ID from ORCID.
+
+== How to use it ==
+
+Just paste the shortcode [wp-orcid-importer orcidid="ORCID-AUTHOR-ID-HERE" publimit="NUMBER OF PUBLICATIONS TO SHOW"]
+You can show the works for more than one person at a time, using a comma to separate the ORCID ID:
+
+[wp-orcid-importer orcidid="0000-0003-3264-5519,0000-0003-3264-55120" publimit="3"]
