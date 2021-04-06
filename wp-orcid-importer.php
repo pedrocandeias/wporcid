@@ -87,9 +87,9 @@ function wp_orcid_importer_code($atts)
                         if ($y==$pubLimit) {
                             break;
                         }
-                        if($nivel2['display-index'] == '0'){}else{
+                       
                         array_push($pubIDs, $nivel2['put-code']);
-                        }
+        
                         $y++;
                     }
                 }
@@ -149,17 +149,14 @@ function wp_orcid_importer_code($atts)
 
             foreach ($jsonInput['bulk'] as $nivel1) {
                 ${'array' . $i} = array(
-                    'pubid' => '',
                     'id' => '',
                     'titulo' => '',
                     'journal' => '',
                     'data' => '',
                     'tipo' => '',
-                    'url' => '',
-                    'source-name' =>'',
+                    'url' => ''
                 );
 
-                ${'array' . $i}['pubid'] = $varNum;
                 ${'array' . $i}['id'] = $pessoa;
 
                 foreach ($nivel1['work']['title']['title'] as $tituloPub) {
@@ -202,6 +199,13 @@ function wp_orcid_importer_code($atts)
                 }
                 array_push($array, ${'array' . $i});
             }
+
+            $unique_array = [];
+            foreach($array as $element) {
+                $hash = $element['titulo'];
+                $unique_array[$hash] = $element;
+            }
+            $array = array_values($unique_array);
             return $array;
         }
     }
